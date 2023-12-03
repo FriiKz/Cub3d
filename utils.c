@@ -6,7 +6,7 @@
 /*   By: lbusi <lbusi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 14:22:31 by aliburdi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:54:41 by lbusi            ###   ########.fr       */
+/*   Updated: 2023/12/03 15:03:43 by lbusi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ void	initializer(t_items *it)
 	it->mlx = mlx_init();
 	it->win = mlx_new_window(it->mlx, 960, 640, "cub3d");
 	it->img = mlx_new_image(it->mlx, 960, 640);
-	it->addr = mlx_get_data_addr(it->img, &it->bits_per_pixel, &it->line_length, &it->endian);
+	it->addr = mlx_get_data_addr(it->img, &it->bits_per_pixel, \
+	&it->line_length, &it->endian);
 	it->px = 150;
 	it->py = 400;
-	it->pa = 90;
-	it->pdx = cos(deg_to_rad(it->pa));
-	it->pdy = -sin(deg_to_rad(it->pa));
 	it->thickness = 8;
 	it->ipx = 0;
 	it->ipx_add_x0 = 0;
@@ -36,6 +34,13 @@ void	initializer(t_items *it)
 	it->ipy_sub_y0 = 0;
 	it->x0 = 0;
 	it->y0 = 0;
+	it->textures = calloc(1, sizeof(t_textures *));
+}
+
+void	initializer2(t_items *it)
+{
+	it->pdx = cos(deg_to_rad(it->pa));
+	it->pdy = -sin(deg_to_rad(it->pa));
 }
 
 int	ft_exit(t_items *it)
@@ -50,7 +55,8 @@ void	ft_clear(t_items *it)
 {
 	mlx_destroy_image(it->mlx, it->img);
 	it->img = mlx_new_image(it->mlx, 960, 640);
-	it->addr = mlx_get_data_addr(it->img, &it->bits_per_pixel, &it->line_length, &it->endian);
+	it->addr = mlx_get_data_addr(it->img, &it->bits_per_pixel, \
+	&it->line_length, &it->endian);
 }
 
 void	my_mlx_pixel_put(t_items *it, int x, int y, int color)

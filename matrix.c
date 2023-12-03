@@ -6,41 +6,18 @@
 /*   By: lbusi <lbusi@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:00:37 by lbusi             #+#    #+#             */
-/*   Updated: 2023/11/28 11:42:28 by lbusi            ###   ########.fr       */
+/*   Updated: 2023/12/03 15:24:31 by lbusi            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// void	matrix_c(t_items *it)
-// {
-// 	int		fd;
-// 	int		i;
-
-// 	i = it->y_max;
-// 	it->y = 0;
-// 	fd = open(it->map, O_RDONLY);
-// 	if (fd == -1)
-// 		exit(0);
-// 	it->matrix = (char **) malloc (sizeof(char *) * (i) + 1);
-// 	if (!it->matrix)
-// 		return ;
-// 	while (i != 0)
-// 	{
-// 		it->matrix[it->y] = get_next_line(fd);
-// 		it->y++;
-// 		i--;
-// 	}
-// 	close(fd);
-// 	it->matrix[it->y] = NULL;
-// }
 
 void	free_matrix(t_items *it)
 {
 	int	i;
 
 	i = 0;
-	while (it->matrix[i])
+	while (i < it->y_max)
 	{
 		free(it->matrix[i]);
 		i++;
@@ -98,12 +75,31 @@ void	printmatrix(t_items *it)
 	int	j;
 
 	i = 0;
-	while (it->matrix[i])
+	while (i < it->y_max)
 	{
 		j = 0;
-		while (it->matrix[i][j])
+		while (j < it->x_max)
 		{
 			printf("%c", it->matrix[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
+void	printnewmatrix(char **new_matrix)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (new_matrix[i])
+	{
+		j = 0;
+		while (new_matrix[i][j])
+		{
+			printf("%c", new_matrix[i][j]);
 			j++;
 		}
 		printf("\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbusi <lbusi@student.42.fr>                +#+  +:+       +#+        */
+/*   By: aliburdi <aliburdi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 11:54:09 by lbusi             #+#    #+#             */
-/*   Updated: 2023/11/28 12:20:35 by lbusi            ###   ########.fr       */
+/*   Updated: 2023/11/28 18:32:59 by aliburdi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,33 @@ char	*ft_strdup(char *s1)
 	ft_memcpy(s2, s1, lenght);
 	s2[lenght] = '\0';
 	return (s2);
+}
+
+int	ft_atoi(const char *str)
+{
+	unsigned int		i;
+	unsigned long int	num;
+	int					neg;
+
+	num = 0;
+	neg = 1;
+	i = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			neg = neg * -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		num = (num * 10 + (str[i] - '0'));
+		i++;
+	}
+	if (num > 9223372036854775807 && neg == -1)
+		return (0);
+	if (num > 9223372036854775807 && neg == 1)
+		return (-1);
+	return (num * neg);
 }
